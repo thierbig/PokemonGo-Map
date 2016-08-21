@@ -225,17 +225,17 @@ class Pogom(Flask):
         cur = db.cursor()
         jsonretour= dict()
         a=[]
-        pokemons = cur.execute("select * from pokemon where pokemon_id in(1,2,3,4,5,75)")
+        pokemons = cur.execute("select * from pokemon")
         for pokemon in pokemons:
             id=int(pokemon[2])
             loldict=dict()
             loldict["id"]=0
-            loldict["name"]=PokemonEnum(id).name
+            loldict["name"]=id
             lat=pokemon[3]
             long=pokemon[4]
             loldict["coords"]=str(lat)+","+str(long)
             loldict["until"]=pokemon[5]
-            loldict["iv"]=0
+            loldict["iv"]=pokemon[1]
             loldict["attacks"]=[]
             loldict["icon"]="lol"
             a.append(loldict)
